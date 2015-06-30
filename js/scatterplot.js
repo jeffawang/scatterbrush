@@ -1,5 +1,6 @@
-function scatterplot(){
+function scatterplot(brushfunc){
     var that = this
+    this.brushfunc = brushfunc
     this.width = 600;
     this.height = 600;
     this.radius = 4;
@@ -55,7 +56,11 @@ function scatterplot(){
       var extent = that.brush.extent();
       that.point.each(function(d) { d.selected = false });
       that.search(that.quadtree, extent[0][0], extent[0][1], extent[1][0], extent[1][1]);
-      that.point.classed("selected", function(d) { return d.selected });
+      that.brushfunc(
+        that.point
+          .classed("selected", function(d) { return d.selected })
+          .filter(function(d) { return d.selected })
+      )
     }
     this.brushended = function() {
       console.log("brush ended")
