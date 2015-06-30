@@ -2,6 +2,7 @@ function scatterplot(){
     var that = this
     this.width = 600;
     this.height = 600;
+    this.radius = 4;
     this.margins = {
         "top"    : 10,
         "bottom" : 10,
@@ -29,8 +30,9 @@ function scatterplot(){
         .y(this.y)
         .extent(this.defaultExtent)
     this.data = d3.range(1000).map(function() {
-        return [that.margined["left"] + Math.random() * that.margined["width"],
-                that.margined["top"] + Math.random() * that.margined["height"]]; });
+        return [that.margined["left"] + that.radius + Math.random() * (that.margined["width"] - 2 * that.radius),
+                that.margined["top"] + that.radius + Math.random() * (that.margined["height"] - 2 * that.radius)];
+    });
     this.quadtree = d3.geom.quadtree()
         .extent([[-1,1], [this.width + 1, this.height + 1]])
         (this.data);
@@ -40,7 +42,7 @@ function scatterplot(){
           .attr("class", "point")
           .attr("cx", function(d) { return d[0] })
           .attr("cy", function(d) { return d[1] })
-          .attr("r", 4);
+          .attr("r", this.radius);
 
     this.brushg = this.svg.append("g")
       .attr("class", "brush")
