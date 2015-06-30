@@ -3,18 +3,18 @@ function scatterplot(){
     this.width = 600;
     this.height = 600;
     this.radius = 4;
-    this.margins = {
+    this.margin = {
         "top"    : 10,
         "bottom" : 10,
         "left"   : 10,
         "right"  : 10 };
     this.margined = {
-        "left"   : this.margins['left'],
-        "top"    : this.margins['top'],
-        "right"  : this.width  - this.margins['right'],
-        "bottom" : this.height - this.margins['bottom'],
-        "width"  : this.width  - this.margins['right']   - this.margins['left'],
-        "height" : this.height - this.margins['bottom']  - this.margins['top'] };
+        "left"   : this.margin['left'],
+        "top"    : this.margin['top'],
+        "right"  : this.width  - this.margin['right'],
+        "bottom" : this.height - this.margin['bottom'],
+        "width"  : this.width  - this.margin['right']   - this.margin['left'],
+        "height" : this.height - this.margin['bottom']  - this.margin['top'] };
     this.defaultExtent = [[100,100],[300,300]];
     this.svg = d3.select("body")
         .append("svg")
